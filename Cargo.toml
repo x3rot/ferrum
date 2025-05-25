@@ -29,6 +29,6 @@ tempfile = "3.10.1"                                  # Temporary file handling f
 assert_fs = "1.1.1"                                  # Filesystem assertions for tests
 mockall = "0.12.1"                                   # Mocking framework
 httpmock = "0.7.0"                                   # HTTP mocking server
-rstest = "0.18.2"                                    # Test fixtures and parameterized tests
+rstest = "0.25.0"                                    # Test fixtures and parameterized tests
 rand = "0.8.5"                                       # Random number generation
 tokio-test = "0.4.3"                                 # Testing utilities for tokio
