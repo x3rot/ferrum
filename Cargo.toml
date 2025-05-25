@@ -27,7 +27,7 @@ dirs = "5.0.1"                                       # Directory paths
 [dev-dependencies]
 tempfile = "3.10.1"                                  # Temporary file handling for tests
 assert_fs = "1.1.1"                                  # Filesystem assertions for tests
-mockall = "0.12.1"                                   # Mocking framework
+mockall = "0.13.1"                                   # Mocking framework
 httpmock = "0.7.0"                                   # HTTP mocking server
 rstest = "0.18.2"                                    # Test fixtures and parameterized tests
 rand = "0.8.5"                                       # Random number generation
