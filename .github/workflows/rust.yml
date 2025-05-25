@@ -7,6 +7,11 @@ on:
   pull_request:
     branches: [ main, master ]
 
+permissions:
+  contents: write
+  packages: write
+  actions: write
+
 env:
   CARGO_TERM_COLOR: always
 
@@ -101,3 +106,5 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

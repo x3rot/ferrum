@@ -4,6 +4,11 @@ on:
   push:
     tags: [ 'v*' ]
 
+permissions:
+  contents: write
+  packages: write
+  actions: write
+
 jobs:
   build:
     name: Build ${{ matrix.os }}
@@ -76,3 +81,5 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
