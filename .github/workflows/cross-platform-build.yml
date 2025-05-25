@@ -1,0 +1,78 @@
+name: Cross-Platform Build
+
+on:
+  push:
+    tags: [ 'v*' ]
+
+jobs:
+  build:
+    name: Build ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: ferrum
+            asset_name: ferrum-linux-amd64
+          - os: windows-latest
+            artifact_name: ferrum.exe
+            asset_name: ferrum-windows-amd64.exe
+          - os: macos-latest
+            artifact_name: ferrum
+            asset_name: ferrum-macos-amd64
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cargo cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.asset_name }}
+          path: target/release/${{ matrix.artifact_name }}
+          if-no-files-found: error
+
+  release:
+    name: Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: ./artifacts
+
+      - name: List artifacts
+        run: find ./artifacts -type f | sort
+
+      - name: Make binaries executable
+        run: |
+          chmod +x ./artifacts/ferrum-linux-amd64/ferrum
+          chmod +x ./artifacts/ferrum-macos-amd64/ferrum
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./artifacts/ferrum-linux-amd64/ferrum
+            ./artifacts/ferrum-macos-amd64/ferrum
+            ./artifacts/ferrum-windows-amd64.exe/ferrum.exe
+          draft: false
+          prerelease: false
+          generate_release_notes: true

@@ -79,6 +79,36 @@ cargo test
 
 The project includes unit tests, parameterized tests, and integration tests to verify functionality.
 
+### Pre-commit Hooks
+
+This project uses pre-commit hooks to ensure code quality. To set them up:
+
+1. Install pre-commit:
+```bash
+pip install pre-commit
+```
+
+2. Install the git hooks:
+```bash
+pre-commit install
+```
+
+The hooks will run automatically on every commit to check formatting, run clippy, and execute tests.
+
+### Git Configuration
+
+For a consistent workflow, we provide a Git configuration setup script:
+
+```bash
+./scripts/setup-git-hooks.sh
+```
+
+This will:
+- Set up a commit message template for better commit messages
+- Install pre-commit hooks
+
+The commit message template follows the [Conventional Commits](https://www.conventionalcommits.org/) specification, which helps with automatic versioning and changelog generation.
+
 ### Project Structure
 
 - **src/**: Contains the source code organized by module
