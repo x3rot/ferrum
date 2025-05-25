@@ -1,4 +1,4 @@
-`# Ferrum - HTTP Proxy for Debugging and Testing
+# Ferrum - HTTP Proxy for Debugging and Testing
 
 Ferrum is a lightweight HTTP proxy written in Rust, designed for debugging, inspecting, and potentially modifying HTTP traffic. It's particularly useful for developers who need to understand the communication between web applications and APIs.
 
