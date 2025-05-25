@@ -22,7 +22,7 @@ anyhow = "1.0.80"                                    # Error handling
 log = "0.4.21"                                       # Logging
 env_logger = "0.11.3"                                # Logging implementation
 chrono = "0.4.35"                                    # Date and time handling
-dirs = "5.0.1"                                       # Directory paths
+dirs = "6.0.0"                                       # Directory paths
 
 [dev-dependencies]
 tempfile = "3.10.1"                                  # Temporary file handling for tests
