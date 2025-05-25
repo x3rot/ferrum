@@ -66,18 +66,34 @@ jobs:
       - name: List artifacts
         run: find ./artifacts -type f | sort
 
-      - name: Make binaries executable
+      - name: Show detailed directory structure
+        run: ls -la ./artifacts/*
+
+      - name: Show exact file paths
         run: |
-          chmod +x ./artifacts/ferrum-linux-amd64/ferrum
-          chmod +x ./artifacts/ferrum-macos-amd64/ferrum
+          echo "Linux binary path:"
+          ls -la ./artifacts/ferrum-linux-amd64/
+          echo "macOS binary path:"
+          ls -la ./artifacts/ferrum-macos-amd64/
+          echo "Windows binary path:"
+          ls -la ./artifacts/ferrum-windows-amd64/
+
+      - name: Prepare release assets
+        run: |
+          mkdir -p ./release-assets
+          cp ./artifacts/ferrum-linux-amd64/ferrum ./release-assets/ferrum-linux-amd64
+          cp ./artifacts/ferrum-macos-amd64/ferrum ./release-assets/ferrum-macos-amd64
+          cp ./artifacts/ferrum-windows-amd64/ferrum.exe ./release-assets/ferrum-windows-amd64.exe
+          chmod +x ./release-assets/ferrum-linux-amd64
+          chmod +x ./release-assets/ferrum-macos-amd64
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./artifacts/ferrum-linux-amd64/ferrum
-            ./artifacts/ferrum-macos-amd64/ferrum
-            ./artifacts/ferrum-windows-amd64.exe/ferrum.exe
+            ./release-assets/ferrum-linux-amd64
+            ./release-assets/ferrum-macos-amd64
+            ./release-assets/ferrum-windows-amd64.exe
           draft: false
           prerelease: false
           generate_release_notes: true
