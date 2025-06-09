@@ -8,7 +8,7 @@ authors = ["Anyesh"]
 [dependencies]
 tokio = { version = "1.36.0", features = ["full"] }  # Async runtime
 hyper = { version = "1.2.0", features = ["full"] }   # HTTP library
-hyper-util = { version = "0.1.4", features = ["full"] } # Hyper utilities
+hyper-util = { version = "0.1.14", features = ["full"] } # Hyper utilities
 http-body-util = "0.1.0"                             # HTTP body utilities
 bytes = "1.5.0"                                      # Bytes handling
 rustls = "0.22.2"                                    # TLS implementation
